@@ -6,14 +6,28 @@ if [[ -r /usr/local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline
 	source /usr/local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
 fi
 
+# FZF - Fuzzy finder
+export PATH=$PATH:/Users/equimper/.vim/plugged/fzf/bin
+export FZF_DEFAULT_COMMAND='rg --files'
+
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 export GOPATH=$HOME/work
 
-alias atom=atom-beta
+alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
+
+# Use Neovim as "preferred editor"
+export VISUAL=nvim
+
+# Use Neovim instead of Vim or Vi
 alias vi=nvim
+alias vim=nvim
+
+alias cl=clear
+
+alias atom=atom-beta
 
 # If you come from bash you might have to change your $PATH.
 
