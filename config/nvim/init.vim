@@ -1,289 +1,202 @@
-set nocompatible
-filetype plugin indent on
+" PLUGINS
 
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+set nocompatible
+filetype off
 
 call plug#begin('~/.vim/plugged')
 
-" Essentials
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'jiangmiao/auto-pairs'
-Plug 'rbgrouleff/bclose.vim'
 Plug 'tpope/vim-projectionist'
-Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-surround'
-Plug 'easymotion/vim-easymotion'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-unimpaired'
 Plug 'tomtom/tcomment_vim'
+Plug 'editorconfig/editorconfig-vim'
 Plug 'mattn/emmet-vim'
-Plug 'alvan/vim-closetag'
-Plug 'tpope/vim-obsession'
-Plug 'bronson/vim-trailing-whitespace'
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+Plug 'rbgrouleff/bclose.vim'
+Plug 'ajh17/VimCompletesMe'
 
-" Time tracking
-Plug 'wakatime/vim-wakatime'
-
-" Fuzzy Finding
+" Navigation
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
+Plug 'easymotion/vim-easymotion'
+Plug 'scrooloose/nerdtree'
 
-Plug 'ervandew/supertab'
+" Git
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 
 " Airline
-Plug 'enricobacis/vim-airline-clock'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-" Prettier
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown'] }
+" Javascript
+Plug 'mxw/vim-jsx'
+Plug 'moll/vim-node'
+Plug 'elzr/vim-json'
+Plug 'ternjs/tern_for_vim', {'do': 'npm install'}
+Plug 'othree/yajs.vim', {'for': 'javascript'}
+Plug 'leafgarland/typescript-vim'
+Plug 'Quramy/tsuquyomi'
+Plug 'mhartington/nvim-typescript', { 'do': './install.sh' }
+
+" Elixir
+Plug 'slashmili/alchemist.vim'
+Plug 'elixir-editors/vim-elixir'
 
 " Linting
 Plug 'w0rp/ale'
 
-" Git Utils
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
+" Format
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown'] }
+Plug 'mhinz/vim-mix-format'
 
-" Language Support
-Plug 'c-brenn/phoenix.vim'
-Plug 'elixir-editors/vim-elixir'
-Plug 'pangloss/vim-javascript'
-Plug 'plasticboy/vim-markdown'
-Plug 'fatih/vim-go'
-Plug 'slashmili/alchemist.vim'
-Plug 'wokalski/autocomplete-flow'
-Plug 'Shougo/neosnippet'
-Plug 'Shougo/neosnippet-snippets'
-Plug 'mxw/vim-jsx'
+" Theme and Syntax Color
+Plug 'rafi/awesome-vim-colorschemes'
 
-" Typescript
-Plug 'leafgarland/typescript-vim'
-Plug 'mhartington/nvim-typescript',       { 'do': ':UpdateRemotePlugins' }
-Plug 'mhartington/deoplete-typescript'
-Plug 'ianks/vim-tsx'
+Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
 
-" ColorSchemes
-Plug 'joshdick/onedark.vim'
-Plug 'iCyMind/NeoSolarized'
-Plug 'rakr/vim-one'
 
 call plug#end()
 
-"----------------------------------------------
-" General settings
-"----------------------------------------------
-set nospell                             " No sound
-set formatoptions+=o                    " Continue comment marker in new lines
-set showmatch                           " Show matching brackets.
-set noswapfile                          " No file create by vim
-set nowrap                              " No file create by vim
-set noerrorbells                        " No bell sound
-set number                              " Show number
-set relativenumber                      " RelativeNumber on
-set tabstop=2                           " Set tab
-set expandtab
-set softtabstop=2                       " Set tabStop
-set shiftwidth=2                        " Set shiftWidth
-set shell=zsh                           " Told neovim which shell we use
-set encoding=utf-8                      " Use UTF-8
-set autoread                            " If file change outside of the editor, make sure they appear
-set scrolloff=5                         " When scroll, always have 5 line top of bottom
-set list
-set list listchars=tab:»\ ,trail:·,nbsp:·
-set numberwidth=5                       " width of the gutter
-syntax enable                           " Allow syntax hightlighting
-set incsearch                           " Increment search
-set hlsearch                            " Hightlight search
-set ignorecase                          " Make searching case insensitive
-set smartcase                           " ... unless the query has capital letters.
-set gdefault                            " Use 'g' flag by default with :s/foo/bar/.
-set magic                               " Use 'magic' patterns (extended regular expressions).<Paste>
-set title                               " Show title
-set smartindent
-set autoindent
-set ruler
-set backspace=indent,eol,start
-set undofile                            " Make sure the undo work between session
-set splitbelow                          " Split the pane bottom when horizontal
-set splitright                          " Split the pane right when vertical
-
-"----------------------------------------------
-" Colors
-"----------------------------------------------
-" let g:gitgutter_override_sign_column_highlight = 0
-"
-" let g:neosolarized_visibility = "low"
-" let g:neosolarized_contrast = "high"
-let g:one_allow_italics = 1
-set background=dark
-colorscheme one
-set termguicolors
-
-"----------------------------------------------
-" Mapping
-"----------------------------------------------
-" Set the MapLeader
+" MAPPINGS
 let mapleader = ','
+nmap <C-p> :<C-u>FZF<CR>
 
-" Clear search hightlights
-map <leader>c :nohlsearch<cr>
-
-" Search and Replace
-nmap <Leader>s :%s//g<Left><Left>
-
-" Dont let use Arrow Keys
-noremap <Up> <Nop>
-noremap <Down> <Nop>
-noremap <Left> <Nop>
-noremap <Right> <Nop>
-
-" Make `jj` and `jk` throw you into mode
-inoremap jj <esc>
-inoremap jk <esc>
-
-" Move between buffers with Shift + arrow key...
-nnoremap <S-Left> :bprevious<cr>
-nnoremap <S-Right> :bnext<cr>
-
-" Move between tab with Shift + arrow key...
-nnoremap <S-Up> :tabnext<cr>
-nnoremap <S-Down> :tabprevious<cr>
-
-" Terminal Mode mapping
-if has ('nvim')
-    tnoremap <Esc> <C-\><C-n>
-    tnoremap <C-v><Esc> <Esc>
-endif
-
-" FZF mapping
-nnoremap <C-p> :<C-u>FZF<cr>
-map <leader>b :Buffers<cr>
-
-" Ale mapping
 nmap <silent> [W <Plug>(ale_first)
 nmap <silent> [w <Plug>(ale_previous)
 nmap <silent> ]w <Plug>(ale_next)
 nmap <silent> ]W <Plug>(ale_last)
-nmap <leader>d <Plug>(ale_fix)
 
-"----------------------------------------------
-" Plugin: rbgrouleff/bclose.vim
-"----------------------------------------------
-" Close buffers
-nnoremap <leader>w :Bclose<cr>
+nmap <leader>c :nohlsearch<cr>
 
-nnoremap <leader>p :Prettier<cr>
+autocmd FileType javascript noremap <leader>p :Prettier<cr>
+autocmd FileType elixir noremap <leader>p :MixFormat<cr>
 
-" Enable mouse if possible
-if has('mouse')
-    set mouse=a
-endif
+noremap <Leader>b :Buffers<CR>
+noremap <Leader>h :History<CR>
 
-"----------------------------------------------
-" Plugin: w0rp/ale
-"----------------------------------------------
-let g:ale_linters = {
-\    'javascript': ['eslint', 'flow'],
-\    'typescript': ['tslint', 'tsserver', 'typecheck'],
-\    'jsx': ['eslint','flow'],
-\    'typescript.tsx': ['tslint', 'tsserver', 'typecheck']
+tnoremap jj <C-\><C-n>
+
+" Dont let use Arrow Keys
+nmap <Up> <Nop>
+nmap <Down> <Nop>
+nmap <Left> <Nop>
+nmap <Right> <Nop>
+
+" Move between buffers with Shift + arrow key...
+nmap <S-Left> :bprevious<cr>
+nmap <S-Right> :bnext<cr>
+nnoremap <leader>w :Bclose!<cr>
+
+nmap <C-n> :NERDTreeToggle<CR>
+
+inoremap jj <esc>
+inoremap jk <esc>
+
+" fugitive git bindings
+nnoremap <space>gs :Gstatus<CR>
+nnoremap <space>gb :Git branch<Space>
+" nnoremap <space>ga :Git add %:p<CR><CR>
+
+" LINTING
+let g:ale_inters = {
+\ 'javascript': ['eslint'],
+\ 'typescript': ['tslint']
 \}
-let g:ale_fixers = {
-\   'javascript': ['eslint'],
-\   'typescript': ['tslint'],
-\   'jsx': ['eslint', 'flow'],
-\   'typescript.tsx': ['tslint']
-\}
-let g:airline#extensions#ale#enabled = 1
-let g:ale_sign_error = '✖'
-hi ALEErrorSign guifg=#DF8C8C
+
+let g:ale_sign_error = '✗'
 let g:ale_sign_warning = '⚠'
-hi ALEWarningSign guifg=#F2C38F
-let g:ale_lint_on_text_changed = 'always'
-let g:ale_lint_on_save = 1
-let g:ale_lint_on_enter = 1
-let g:ale_lint_on_filetype_changed = 1
-let g:ale_sign_column_always = 1
 
-"----------------------------------------------
-" Plugin: bling/vim-airline
-"----------------------------------------------
-let g:airline_theme='one'
+" GENERAL SETTINGS
+syntax enable
+colorscheme molokai
+set background=dark
 
-" Enable top tabline.
-let g:airline#extensions#tabline#enabled = 1
-" Disable showing tabs in the tabline. This will ensure that the buffers are
-" what is shown in the tabline at all times.
-let g:airline#extensions#tabline#show_tabs = 0
+set splitbelow
+set splitright
 
-" Enable powerline fonts.
-let g:airline_powerline_fonts = 1
+set cursorline
+set cursorcolumn
+set colorcolumn=81
 
-"----------------------------------------------
-" Plugin: scrooloose/nerdtree
-"----------------------------------------------
-map <C-n> :NERDTreeToggle<CR>
+set mouse=a
 
-" Files to ignore
-let NERDTreeIgnore = [
-\  '^node_modules[[dir]]'
-\]
+set shell=zsh
+set encoding=utf-8
+set autoindent
+set smartindent
+set autoread
 
-"----------------------------------------------
-" Plugin: Shougo/deoplete.nvim
-"----------------------------------------------
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+
+set nospell
+set noswapfile
+set nowrap
+set noerrorbells
+set hidden
+
+set number
+set relativenumber
+
+set scrolloff=10
+
+set incsearch
+set hlsearch
+
+set wildignore+=*.pyc,*.o,*/.git/*,*/build/*,*.swp,*/.svn,*/.hg
+
 let g:deoplete#enable_at_startup = 1
 
-"----------------------------------------------
-" Plugin: Shougo/neosnippet
-"----------------------------------------------
-let g:neosnippet#enable_completed_snippet = 1
+let g:one_allow_italics = 1
 
-"----------------------------------------------
-" Plugin: mattn/emmet-vim
-"----------------------------------------------
+let g:airline#extensions#ale#enabled = 1
+let g:airline_powerline_fonts = 1
+
+let g:airline_theme='molokai'
+let g:airline#extensions#tabline#enabled = 1
+
 let g:user_emmet_settings = {
 \  'javascript' : {
-\     'extends': 'jsx',
-\     'quote_char': '"',
+\      'extends': 'jsx',
+\      'quote_char': '"',
 \  },
 \  'typescript' : {
-\    'extends': 'jsx',
-\    'quote_char': '"',
+\ 'extends': 'jsx',
+\ 'quote_char': '"',
 \  }
 \}
 
 "----------------------------------------------
-" Plugin: alvan/vim-closetag
+" Language: JavaScript
 "----------------------------------------------
-let g:closetag_filenames = '*.html,*.xhtml,*.phtml'
-let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.tsx'
-let g:closetag_emptyTags_caseSensitive = 1
-let g:closetag_shortcut = '>'
+au FileType javascript set expandtab
+au FileType javascript set shiftwidth=2
+au FileType javascript set softtabstop=2
+au FileType javascript set tabstop=2
 
-" Terminal Cursor
-if has ('nvim')
-    highlight! link TermCursor Cursor
-    highlight! TermCursorNC guibg='#c678dd' guifg=white ctermbg=1 ctermfg=15
+if $TERM_PROGRAM =~ "iTerm"
+	let &t_SI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert mode
+	let &t_EI = "\<Esc>]50;CursorShape=0\x7" " Block in normal mode
 endif
 
-" Switching pane
-nnoremap <M-h> <c-w>h
-nnoremap <M-j> <c-w>j
-nnoremap <M-k> <c-w>k
-nnoremap <M-l> <c-w>l
-if has ('nvim')
-    tnoremap <M-h> <c-\><c-n><c-w>h
-    tnoremap <M-j> <c-\><c-n><c-w>j
-    tnoremap <M-k> <c-\><c-n><c-w>k
-    tnoremap <M-l> <c-\><c-n><c-w>l
+if (empty($TMUX))
+  if (has("nvim"))
+		let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  endif
+  if (has("termguicolors"))
+    set termguicolors
+  endif
 endif
 
-" Close typescript preview screen
-set completeopt-=preview
+set t_8b=^[[48;2;%lu;%lu;%lum
+set t_8f=^[[38;2;%lu;%lu;%lum
 
-" Allow JSX syntax in JS files
-let g:jsx_ext_required = 0
+if &term =~ '256color'
+	set t_ut=
+endif
