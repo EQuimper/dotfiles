@@ -22,8 +22,10 @@ return {
 
     local lspkind = require("lspkind")
 
-    -- loads vscode style snippets from installed plugins (e.g. friendly-snippets)
+    -- custom snippets being the first will show them at the top
     require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./snippets" } })
+    -- loads vscode style snippets from installed plugins (e.g. friendly-snippets)
+    require("luasnip.loaders.from_vscode").lazy_load()
 
     cmp.setup({
       completion = {
