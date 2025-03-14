@@ -179,3 +179,11 @@ function y() {
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 alias dotfiles=/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME
+
+
+# Herd injected PHP 8.4 configuration.
+export HERD_PHP_84_INI_SCAN_DIR="/Users/emanuelquimper/Library/Application Support/Herd/config/php/84/"
+
+
+# Herd injected PHP 8.3 configuration.
+export HERD_PHP_83_INI_SCAN_DIR="/Users/emanuelquimper/Library/Application Support/Herd/config/php/83/"
