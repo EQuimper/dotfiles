@@ -187,3 +187,8 @@ export HERD_PHP_84_INI_SCAN_DIR="/Users/emanuelquimper/Library/Application Suppo
 
 # Herd injected PHP 8.3 configuration.
 export HERD_PHP_83_INI_SCAN_DIR="/Users/emanuelquimper/Library/Application Support/Herd/config/php/83/"
+
+. ~/.asdf/plugins/golang/set-env.zsh
+
+export DOCKER_HOST=unix:///$(podman machine inspect --format '{{.ConnectionInfo.PodmanSocket.Path}}')
+
