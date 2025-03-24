@@ -136,6 +136,8 @@ fi
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+alias n="nvim"
+
 alias ls="eza --icons=always --no-permissions --no-filesize --no-user --no-time"
 
 eval "$(zoxide init zsh)"
