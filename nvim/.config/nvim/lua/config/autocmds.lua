@@ -11,3 +11,5 @@ vim.filetype.add({
     [".*%.blade%.php"] = "blade",
   },
 })
+
+vim.cmd(":clearjumps")

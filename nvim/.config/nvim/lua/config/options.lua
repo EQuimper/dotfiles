@@ -5,3 +5,6 @@
 vim.g.lazyvim_eslint_auto_format = true
 
 vim.g.lazyvim_php_lsp = "intelephense"
+
+vim.opt.title = true
+vim.opt.scrolloff = 10
