@@ -40,6 +40,10 @@ case $INFO in
 "kitty")
   ICON=󰄛
   ;;
+"Mail")
+  ICON_PADDING_RIGHT=3
+  ICON=
+  ;;
 "Messages")
   ICON=
   ;;
@@ -59,9 +63,17 @@ case $INFO in
   ICON_PADDING_RIGHT=3
   ICON=
   ;;
+"Simulator")
+  ICON_PADDING_RIGHT=2
+  ICON=
+  ;;
 "Spotify")
   ICON_PADDING_RIGHT=2
   ICON=
+  ;;
+"WezTerm")
+  ICON_PADDING_RIGHT=2
+  ICON=
   ;;
 "TextEdit")
   ICON_PADDING_RIGHT=4

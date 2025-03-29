@@ -6,13 +6,14 @@ local config = wezterm.config_builder()
 -- config.font = wezterm.font("MesloLGS Nerd Font Mono")
 config.font = wezterm.font("JetbrainsMono Nerd Font Mono")
 
-config.font_size = 12
+config.font_size = 13
 
 config.enable_tab_bar = false
 
 config.window_decorations = "RESIZE"
-config.window_background_opacity = 0.75
-config.macos_window_background_blur = 10
+-- config.window_background_opacity = 0.75
+config.window_background_opacity = 0.90
+config.macos_window_background_blur = 5
 
 config.colors = {
 	foreground = "#CBE0F0",
@@ -26,7 +27,7 @@ config.colors = {
 	brights = { "#214969", "#E52E2E", "#44FFB1", "#FFE073", "#A277FF", "#a277ff", "#24EAF7", "#24EAF7" },
 }
 
-config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
+-- config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
 
 config.keys = {
 	{
@@ -52,7 +53,11 @@ config.keys = {
 	{
 		key = "k",
 		mods = "CMD",
-		action = wezterm.action.ClearScrollback("ScrollbackAndViewport"),
+		-- action = wezterm.action.ClearScrollback("ScrollbackAndViewport"),
+		action = wezterm.action.Multiple({
+			wezterm.action.ClearScrollback("ScrollbackAndViewport"),
+			wezterm.action.SendKey({ key = "L", mods = "CTRL" }),
+		}),
 	},
 	{
 		key = "p",

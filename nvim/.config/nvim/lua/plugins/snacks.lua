@@ -6,6 +6,9 @@ return {
         hidden = true, -- for hidden files
         ignored = false, -- for .gitignore files
       },
+      scroll = {
+        enabled = false,
+      },
     },
   },
 }
