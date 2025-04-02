@@ -4,3 +4,5 @@
 vim.api.nvim_set_keymap("i", "jj", "<ESC>", { noremap = false })
 vim.api.nvim_set_keymap("i", "<C-c>", "<ESC>", { noremap = false })
 vim.keymap.del({ "n", "i", "x", "s" }, "<C-s>")
+vim.api.nvim_set_keymap("n", "<C-d>", "<C-d>zz", { noremap = true })
+vim.api.nvim_set_keymap("n", "<C-u>", "<C-u>zz", { noremap = true })
