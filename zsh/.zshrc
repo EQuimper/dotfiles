@@ -194,3 +194,5 @@ export HERD_PHP_83_INI_SCAN_DIR="/Users/emanuelquimper/Library/Application Suppo
 
 export DOCKER_HOST=unix:///$(podman machine inspect --format '{{.ConnectionInfo.PodmanSocket.Path}}')
 
+eval "$(/opt/homebrew/bin/mise activate)"
+
