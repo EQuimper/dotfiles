@@ -1,10 +1,18 @@
 {
   "console.log": {
+    "prefix": "clog",
+    "body": "console.log($0);"
+  },
+  "console.log object": {
     "prefix": "log",
     "body": "console.log({ $0 });"
   },
   "import react": {
     "prefix": "imr",
     "body": "import React from 'react';"
+  },
+  "import react-native": {
+    "prefix": "imrn",
+    "body": "import { $0 } from 'react-native';"
   }
 }
