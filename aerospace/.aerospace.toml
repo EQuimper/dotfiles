@@ -86,6 +86,10 @@ run = 'move-node-to-workspace 2'
 if.app-id = 'com.github.wez.wezterm'
 run = 'move-node-to-workspace 3'
 
+[[on-window-detected]]
+if.app-id = 'com.edisonmail.edisonmail'
+run = 'move-node-to-workspace M'
+
 [workspace-to-monitor-force-assignment]
 
 # 'main' binding mode declaration

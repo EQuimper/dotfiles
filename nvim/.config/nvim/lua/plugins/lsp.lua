@@ -15,6 +15,13 @@ return {
           },
         },
       },
+      tailwindcss = {
+        settings = {
+          tailwindCSS = {
+            classFunctions = { "cva", "cx" },
+          },
+        },
+      },
     },
   },
 }

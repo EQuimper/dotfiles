@@ -20,12 +20,14 @@ return {
     "catppuccin/nvim",
     lazy = true,
     name = "catppuccin",
+    priority = 1000,
     opts = {
       flavour = "macchiato",
       transparent_background = true,
       integrations = {
         aerial = true,
         alpha = true,
+        bufferline = false, -- Disable bufferline integration to avoid the error
         cmp = true,
         dashboard = true,
         flash = true,
@@ -62,17 +64,10 @@ return {
         which_key = true,
       },
     },
-    specs = {
-      {
-        "akinsho/bufferline.nvim",
-        optional = true,
-        opts = function(_, opts)
-          if (vim.g.colors_name or ""):find("catppuccin") then
-            opts.highlights = require("catppuccin.groups.integrations.bufferline").get()
-          end
-        end,
-      },
-    },
+  },
+  {
+    "akinsho/bufferline.nvim",
+    enabled = false, -- Disable bufferline entirely to avoid the error
   },
   {
     "LazyVim/LazyVim",
