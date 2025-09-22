@@ -13,22 +13,21 @@ return {
       ghost_text = {
         enabled = true,
       },
-      -- menu = {
-      --   auto_show = false,
-      -- },
     },
     keymap = {
-      -- ["<Tab>"] = {
-      --   function(cmp)
-      --     if cmp.is_ghost_text_visible() and not cmp.is_menu_visible() then
-      --       return cmp.accept()
-      --     end
-      --   end,
-      --   "show_and_insert",
-      -- },
+      -- Manual ghost text trigger - show completion with ghost text
+      ["<C-g>"] = { "show" },
+      -- Accept ghost text if visible, otherwise fallback to normal tab behavior
+      ["<Tab>"] = {
+        function(cmp)
+          if cmp.is_ghost_text_visible() then
+            return cmp.accept()
+          end
+        end,
+        "select_next",
+        "fallback"
+      },
       ["<CR>"] = { "accept", "fallback" },
-      -- ["<C-j>"] = { "select_next", "fallback" },
-      -- ["<C-k>"] = { "select_prev", "fallback" },
     },
     sources = {
       default = { "lsp", "path", "snippets", "buffer", "copilot" },
