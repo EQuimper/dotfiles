@@ -7,6 +7,17 @@ return {
           enabled = false,
         },
       },
+      trigger = {
+        show_on_keyword = false,
+        show_on_backspace = false,
+        show_on_backspace_in_keyword = false,
+        show_on_backspace_after_accept = false,
+        show_on_backspace_after_insert_enter = false,
+        show_on_trigger_character = false,
+        show_on_insert = false,
+        show_on_accept_on_trigger_character = false,
+        show_on_insert_on_trigger_character = false,
+      },
       documentation = {
         auto_show = false,
       },
@@ -16,7 +27,8 @@ return {
     },
     keymap = {
       -- Manual ghost text trigger - show completion with ghost text
-      ["<C-g>"] = { "show" },
+      ["<C-Space>"] = { "show" },
+      ["<C-@>"] = { "show" },
       -- Accept ghost text if visible, otherwise fallback to normal tab behavior
       ["<Tab>"] = {
         function(cmp)
