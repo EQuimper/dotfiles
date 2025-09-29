@@ -14,6 +14,7 @@ fi
 export ZSH="$HOME/.oh-my-zsh"
 
 export PATH=$PATH:$(go env GOPATH)/bin
+
 # fnm
 export PATH=/home/$USER/.fnm:$PATH
 eval "$(fnm env --use-on-cd --version-file-strategy=recursive)"
@@ -67,7 +68,7 @@ ZSH_THEME="robbyrussell"
 # DISABLE_LS_COLORS="true"
 
 # Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
 # ENABLE_CORRECTION="true"
@@ -197,3 +198,8 @@ export DOCKER_HOST=unix:///$(podman machine inspect --format '{{.ConnectionInfo.
 
 eval "$(/opt/homebrew/bin/mise activate)"
 
+EAS_AC_ZSH_SETUP_PATH=/Users/emanuelquimper/Library/Caches/eas-cli/autocomplete/zsh_setup && test -f $EAS_AC_ZSH_SETUP_PATH && source $EAS_AC_ZSH_SETUP_PATH; # eas autocomplete setupexport PATH=$PATH:$(go env GOPATH)/bin
+
+
+# Herd injected PHP 8.5 configuration.
+export HERD_PHP_85_INI_SCAN_DIR="/Users/emanuelquimper/Library/Application Support/Herd/config/php/85/"
