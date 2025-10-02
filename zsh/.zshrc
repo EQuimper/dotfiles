@@ -203,3 +203,4 @@ EAS_AC_ZSH_SETUP_PATH=/Users/emanuelquimper/Library/Caches/eas-cli/autocomplete/
 
 # Herd injected PHP 8.5 configuration.
 export HERD_PHP_85_INI_SCAN_DIR="/Users/emanuelquimper/Library/Application Support/Herd/config/php/85/"
+export PATH="$HOME/.local/bin:$PATH"

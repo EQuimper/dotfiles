@@ -5,8 +5,8 @@ return {
     build = ":Copilot auth",
     config = function()
       -- Set explicit Node path for Copilot to avoid version conflicts
-      vim.g.copilot_node_command = vim.fn.expand("~/.local/share/fnm/node-versions/v20.18.3/installation/bin/node")
-      
+      vim.g.copilot_node_command = vim.fn.expand("~/.local/share/fnm/node-versions/v22.14.0/installation/bin/node")
+
       require("copilot").setup({})
     end,
     event = "BufReadPost",
