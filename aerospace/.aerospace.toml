@@ -76,7 +76,7 @@ run = 'move-node-to-workspace D'
 
 [[on-window-detected]]
 if.app-id = 'com.apple.iphonesimulator'
-run = 'move-node-to-workspace 4'
+run = 'move-node-to-workspace 3'
 
 [[on-window-detected]]
 if.app-id = 'org.mozilla.firefox'
@@ -88,7 +88,7 @@ run = 'move-node-to-workspace B'
 
 [[on-window-detected]]
 if.app-id = 'com.github.wez.wezterm'
-run = 'move-node-to-workspace 3'
+run = 'move-node-to-workspace W'
 
 [[on-window-detected]]
 if.app-id = 'com.edisonmail.edisonmail'
