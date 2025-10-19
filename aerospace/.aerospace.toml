@@ -67,6 +67,10 @@ automatically-unhide-macos-hidden-apps = false
     outer.right =      10
 
 [[on-window-detected]]
+if.app-id = 'com.apple.finder'
+run = "layout floating"
+
+[[on-window-detected]]
 if.app-id = 'com.microsoft.teams2'
 run = 'move-node-to-workspace T'
 
@@ -102,6 +106,10 @@ run = 'move-node-to-workspace M'
 if.app-id = 'com.tinyspeck.slackmacgap'
 run = 'move-node-to-workspace S'
 
+[[on-window-detected]]
+if.app-id = "com.microsoft.VSCode"
+run = ['layout tiling', 'move-node-to-workspace V']
+
 [workspace-to-monitor-force-assignment]
 
 # 'main' binding mode declaration
@@ -135,6 +143,8 @@ run = 'move-node-to-workspace S'
     #     activate
     # end tell'
     # '''
+    alt-ctrl-shift-f = 'fullscreen'
+    alt-ctrl-f = 'layout floating tiling'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#layout
     alt-slash = 'layout tiles horizontal vertical'
