@@ -13,6 +13,8 @@ after-startup-command = [
   'exec-and-forget borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=10.0'
 ]
 
+exec-on-workspace-change = ['/opt/homebrew/bin/sketchybar', '--trigger', 'aerospace_workspace_change']
+
 # Start AeroSpace at login
 start-at-login = true
 
