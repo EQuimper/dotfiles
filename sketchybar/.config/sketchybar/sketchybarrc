@@ -73,7 +73,7 @@ sketchybar --add item front_app left \
 
 sketchybar --add item weather q \
     --set weather \
-    icon= \
+    icon=\
     icon.color=0xfff5bde6 \
     icon.font="$FONT_FACE:Bold:15.0" \
     update_freq=1800 \
