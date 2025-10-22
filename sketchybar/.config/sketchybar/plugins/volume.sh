@@ -15,4 +15,6 @@ case ${INFO} in
   ;;
 esac
 
-sketchybar --set $NAME icon=$ICON icon.padding_right=$ICON_PADDING_RIGHT label="$INFO%"
+VOLUME=${INFO:-$(osascript -e "output volume of (get volume settings)")}
+
+sketchybar --set $NAME icon=$ICON icon.padding_right=$ICON_PADDING_RIGHT label="$VOLUME%"

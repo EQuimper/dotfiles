@@ -92,7 +92,8 @@ sketchybar --add item clock right \
     icon=󰃰 \
     icon.color=0xffed8796 \
     update_freq=10 \
-    script="$PLUGIN_DIR/clock.sh"
+    script="$PLUGIN_DIR/clock.sh" \
+    --subscribe clock mouse.clicked
 
 sketchybar --add item battery right \
     --set battery \
@@ -104,6 +105,7 @@ sketchybar --add item volume right \
     --set volume \
     icon.color=0xff8aadf4 \
     label.drawing=true \
+    update_freq=60 \
     script="$PLUGIN_DIR/volume.sh" \
     --subscribe volume volume_change
 
