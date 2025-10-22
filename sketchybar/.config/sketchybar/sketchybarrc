@@ -108,12 +108,19 @@ sketchybar --add item battery right \
     update_freq=20 \
     script="$PLUGIN_DIR/battery.sh"
 
+
 sketchybar --add item volume right \
     --set volume \
     icon.color=0xff8aadf4 \
     label.drawing=true \
     script="$PLUGIN_DIR/volume.sh" \
     --subscribe volume volume_change
+
+sketchybar --add item pomodoro right \
+    --set pomodoro \
+    update_freq=1 \
+    script="$PLUGIN_DIR/pomodoro.sh" \
+    --subscribe pomodoro mouse.clicked
 
 # source="$ITEM_DIR/music.sh"
 
