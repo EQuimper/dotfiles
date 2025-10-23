@@ -1,102 +1,103 @@
 return {
   "saghen/blink.cmp",
-  opts = {
-    completion = {
-      accept = {
-        auto_brackets = {
-          enabled = false,
-        },
-      },
-      trigger = {
-        show_on_keyword = false,
-        show_on_backspace = false,
-        show_on_backspace_in_keyword = false,
-        show_on_backspace_after_accept = false,
-        show_on_backspace_after_insert_enter = false,
-        show_on_trigger_character = false,
-        show_on_insert = false,
-        show_on_accept_on_trigger_character = false,
-        show_on_insert_on_trigger_character = false,
-      },
-      documentation = {
-        auto_show = false,
-      },
-      ghost_text = {
-        enabled = true,
-      },
-    },
-    keymap = {
-      -- Manual ghost text trigger - show completion with ghost text
-      ["<C-Space>"] = { "show" },
-      ["<C-@>"] = { "show" },
-      -- Accept ghost text if visible, otherwise fallback to normal tab behavior
-      ["<Tab>"] = {
-        function(cmp)
-          if cmp.is_ghost_text_visible() then
-            return cmp.accept()
-          end
-        end,
-        "select_next",
-        "fallback"
-      },
-      ["<CR>"] = { "accept", "fallback" },
-    },
-    sources = {
-      default = { "lsp", "path", "snippets", "buffer", "copilot" },
-      providers = {
-        copilot = {
-          name = "copilot",
-          module = "blink-cmp-copilot",
-          kind = "Copilot",
-          score_offset = 100,
-          async = true,
-          transform_items = function(_, items)
-            local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
-            local kind_idx = #CompletionItemKind + 1
-            CompletionItemKind[kind_idx] = "Copilot"
-            for _, item in ipairs(items) do
-              item.kind = kind_idx
-            end
-            return items
-          end,
-        },
-      },
-    },
-    appearance = {
-      -- Blink does not expose its default kind icons so you must copy them all (or set your custom ones) and add Copilot
-      kind_icons = {
-        Copilot = "",
-        Text = "󰉿",
-        Method = "󰊕",
-        Function = "󰊕",
-        Constructor = "󰒓",
+  opts = function(_, opts)
+    -- 1) don't show popup automatically
+    opts.completion = vim.tbl_deep_extend("force", opts.completion or {}, {
+      menu = { auto_show = false }, -- only show when you ask
+    })
 
-        Field = "󰜢",
-        Variable = "󰆦",
-        Property = "󰖷",
+    -- 2) manual trigger & close for the menu
+    opts.keymap = vim.tbl_deep_extend("force", opts.keymap or {}, {
+      preset = opts.keymap and opts.keymap.preset or "default",
+      ["<C-Space>"] = { "show" }, -- open completion menu on demand
+      ["<C-e>"] = { "hide" }, -- close menu
+      -- ensure blink doesn't steal <S-Tab> (we'll use it for Copilot)
+      ["<S-Tab>"] = { "fallback" },
+    })
 
-        Class = "󱡠",
-        Interface = "󱡠",
-        Struct = "󱡠",
-        Module = "󰅩",
-
-        Unit = "󰪚",
-        Value = "󰦨",
-        Enum = "󰦨",
-        EnumMember = "󰦨",
-
-        Keyword = "󰻾",
-        Constant = "󰏿",
-
-        Snippet = "󱄽",
-        Color = "󰏘",
-        File = "󰈔",
-        Reference = "󰬲",
-        Folder = "󰉋",
-        Event = "󱐋",
-        Operator = "󰪚",
-        TypeParameter = "󰬛",
-      },
-    },
-  },
+    return opts
+  end,
+  -- opts = {
+  --   completion = {
+  --     accept = {
+  --       auto_brackets = {
+  --         enabled = true,
+  --       },
+  --     },
+  --     menu = {
+  --       auto_show = false, -- Don't show menu automatically, only ghost text
+  --     },
+  --     documentation = {
+  --       auto_show = false,
+  --     },
+  --     ghost_text = {
+  --       enabled = true,
+  --     },
+  --   },
+  --   keymap = {
+  --     ["<C-Space>"] = { "show" },
+  --     ["<C-@>"] = { "show" },
+  --     -- Tab: Navigate menu
+  --     ["<Tab>"] = { "select_next", "fallback" },
+  --     -- ["<S-Tab>"] = { "accept", "fallback" },
+  --     ["<CR>"] = { "accept", "fallback" },
+  --   },
+  --   sources = {
+  --     default = { "lsp", "path", "snippets", "buffer", "copilot" },
+  --     providers = {
+  --       copilot = {
+  --         name = "copilot",
+  --         module = "blink-cmp-copilot",
+  --         kind = "Copilot",
+  --         score_offset = 100,
+  --         async = true,
+  --         transform_items = function(_, items)
+  --           local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
+  --           local kind_idx = #CompletionItemKind + 1
+  --           CompletionItemKind[kind_idx] = "Copilot"
+  --           for _, item in ipairs(items) do
+  --             item.kind = kind_idx
+  --           end
+  --           return items
+  --         end,
+  --       },
+  --     },
+  --   },
+  --   appearance = {
+  --     -- Blink does not expose its default kind icons so you must copy them all (or set your custom ones) and add Copilot
+  --     kind_icons = {
+  --       Copilot = "",
+  --       Text = "󰉿",
+  --       Method = "󰊕",
+  --       Function = "󰊕",
+  --       Constructor = "󰒓",
+  --
+  --       Field = "󰜢",
+  --       Variable = "󰆦",
+  --       Property = "󰖷",
+  --
+  --       Class = "󱡠",
+  --       Interface = "󱡠",
+  --       Struct = "󱡠",
+  --       Module = "󰅩",
+  --
+  --       Unit = "󰪚",
+  --       Value = "󰦨",
+  --       Enum = "󰦨",
+  --       EnumMember = "󰦨",
+  --
+  --       Keyword = "󰻾",
+  --       Constant = "󰏿",
+  --
+  --       Snippet = "󱄽",
+  --       Color = "󰏘",
+  --       File = "󰈔",
+  --       Reference = "󰬲",
+  --       Folder = "󰉋",
+  --       Event = "󱐋",
+  --       Operator = "󰪚",
+  --       TypeParameter = "󰬛",
+  --     },
+  --   },
+  -- },
 }

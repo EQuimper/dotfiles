@@ -22,8 +22,10 @@ return {
     name = "catppuccin",
     priority = 1000,
     opts = {
-      flavour = "macchiato",
-      transparent_background = true,
+      flavour = "mocha",
+      -- flavour = "macchiato",
+      transparent_background = false,
+      -- transparent_background = true,
       integrations = {
         aerial = true,
         alpha = true,
