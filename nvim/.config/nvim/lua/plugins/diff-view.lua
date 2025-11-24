@@ -6,8 +6,8 @@ return {
       "nvim-tree/nvim-web-devicons", -- Optional for file icons
     },
     keys = {
-      { "<leader>gd", "<cmd>DiffviewOpen<cr>", desc = "Open Diffview" },
-      { "<leader>gD", "<cmd>DiffviewClose<cr>", desc = "Close Diffview" },
+      { "<leader>gp", "<cmd>DiffviewOpen<cr>", desc = "Open Diffview" },
+      { "<leader>gP", "<cmd>DiffviewClose<cr>", desc = "Close Diffview" },
     },
     opts = {
       diff_binaries = false,
