@@ -1,5 +1,38 @@
 #!/usr/bin/env zsh
 
+# Handle click - open meeting URL if present
+if [ "$BUTTON" = "left" ]; then
+  # Get both URL and notes fields from the event
+  EVENT_DATA=$(icalBuddy -n -li 1 -ea -nc -nrd -iep url,notes -b "" eventsToday 2>/dev/null)
+  
+  # Search for common meeting URLs (Google Meet, Teams, Zoom, Webex)
+  MEETING_URL=$(echo "$EVENT_DATA" | grep -oE 'https://meet\.google\.com/[a-zA-Z0-9_-]+' | head -1)
+  
+  if [ -z "$MEETING_URL" ]; then
+    MEETING_URL=$(echo "$EVENT_DATA" | grep -oE 'https://teams\.microsoft\.com/[^ ]+' | head -1)
+  fi
+  
+  if [ -z "$MEETING_URL" ]; then
+    MEETING_URL=$(echo "$EVENT_DATA" | grep -oE 'https://[a-zA-Z0-9.-]*zoom\.us/[^ ]+' | head -1)
+  fi
+  
+  if [ -z "$MEETING_URL" ]; then
+    MEETING_URL=$(echo "$EVENT_DATA" | grep -oE 'https://[a-zA-Z0-9.-]*webex\.com/[^ ]+' | head -1)
+  fi
+  
+  # Fallback to any URL if no meeting URL found
+  if [ -z "$MEETING_URL" ]; then
+    MEETING_URL=$(echo "$EVENT_DATA" | grep -oE 'https?://[^ ]+' | head -1)
+  fi
+  
+  if [ -n "$MEETING_URL" ]; then
+    open "$MEETING_URL"
+  else
+    open -a Calendar
+  fi
+  exit 0
+fi
+
 # Get the next calendar event for today using icalBuddy
 NEXT_EVENT=$(icalBuddy -n -li 1 -ea -nc -nrd -df "" -tf "%H:%M" eventsToday 2>/dev/null)
 

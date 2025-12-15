@@ -115,7 +115,7 @@ sketchybar --add item calendar right \
     icon.color=0xffeed49f \
     update_freq=1800 \
     script="$PLUGIN_DIR/calendar.sh" \
-    --subscribe calendar system_woke
+    --subscribe calendar system_woke mouse.clicked
 
 sketchybar --add item pomodoro right \
     --set pomodoro \
