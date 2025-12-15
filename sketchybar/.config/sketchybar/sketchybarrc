@@ -109,6 +109,14 @@ sketchybar --add item volume right \
     script="$PLUGIN_DIR/volume.sh" \
     --subscribe volume volume_change
 
+sketchybar --add item calendar right \
+    --set calendar \
+    icon=󰃭 \
+    icon.color=0xffeed49f \
+    update_freq=1800 \
+    script="$PLUGIN_DIR/calendar.sh" \
+    --subscribe calendar system_woke
+
 sketchybar --add item pomodoro right \
     --set pomodoro \
     update_freq=1 \
