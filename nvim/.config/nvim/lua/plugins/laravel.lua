@@ -13,6 +13,9 @@ return {
     { "<leader>lm", ":Laravel related<cr>" },
   },
   event = { "VeryLazy" },
+  cond = function()
+    return vim.fn.filereadable("artisan") == 1
+  end,
   opts = {},
   config = true,
 }

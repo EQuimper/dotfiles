@@ -7,3 +7,12 @@ vim.keymap.del({ "n", "i", "x", "s" }, "<C-s>")
 vim.api.nvim_set_keymap("n", "<C-d>", "<C-d>zz", { noremap = true })
 vim.api.nvim_set_keymap("n", "<C-u>", "<C-u>zz", { noremap = true })
 vim.api.nvim_set_keymap("n", "<C-s>", ":w<CR>", { noremap = true })
+vim.api.nvim_set_keymap("i", "<C-v>", '<C-r>+', { noremap = true })
+
+-- vim.keymap.set("i", "<S-Tab>", function()
+--   if require("copilot.suggestion").is_visible() then
+--     require("copilot.suggestion").accept()
+--   else
+--     return "<S-Tab>"
+--   end
+-- end, { expr = true, silent = true, desc = "Accept Copilot suggestion" })
