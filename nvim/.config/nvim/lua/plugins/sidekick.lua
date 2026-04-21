@@ -12,7 +12,7 @@ return {
     end
 
     opts.cli = opts.cli or {}
-    opts.cli.mux = vim.tbl_extend("force", { backend = "tmux", enabled = false }, opts.cli.mux or {})
+    opts.cli.mux = vim.tbl_extend("force", { backend = "tmux", enabled = true }, opts.cli.mux or {})
     opts.cli.win = opts.cli.win or {}
     local keys = opts.cli.win.keys or {}
 

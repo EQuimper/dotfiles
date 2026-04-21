@@ -1,0 +1,4 @@
+WRN 2025-11-18T15:56:53.274 ?.46143    server_start:197: Failed to start server: operation not permitted: /var/folders/vx/wr1rljhs7t1_rv8793kgfdvw0000gn/T/nvim.emanuelquimper/s3rnYC/nvim.46143.0
+WRN 2025-11-19T10:01:54.624 ?.92259    server_start:197: Failed to start server: operation not permitted: /var/folders/vx/wr1rljhs7t1_rv8793kgfdvw0000gn/T/nvim.emanuelquimper/9s86R4/nvim.92259.0
+WRN 2026-04-17T14:43:47.857 ?.25822    server_start:197: Failed to start server: operation not permitted: /var/folders/vx/wr1rljhs7t1_rv8793kgfdvw0000gn/T/nvim.emanuelquimper/uYLl4P/nvim.25822.0
+WRN 2026-04-17T14:43:47.857 ?.25823    server_start:197: Failed to start server: operation not permitted: /var/folders/vx/wr1rljhs7t1_rv8793kgfdvw0000gn/T/nvim.emanuelquimper/LZU5hT/nvim.25823.0

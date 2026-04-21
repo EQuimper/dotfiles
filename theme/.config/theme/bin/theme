@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+# Toggle Catppuccin theme (mocha <-> latte) across nvim, tmux, wezterm.
+# Usage: theme [dark|light|toggle]   (default: toggle)
+
+set -euo pipefail
+
+STATE="$HOME/.config/theme/current"
+mkdir -p "$(dirname "$STATE")"
+
+cur="dark"
+[ -f "$STATE" ] && cur="$(cat "$STATE")"
+
+case "${1:-toggle}" in
+  dark|light) new="$1" ;;
+  toggle)     new=$([ "$cur" = "light" ] && echo dark || echo light) ;;
+  *) echo "usage: theme [dark|light|toggle]" >&2; exit 2 ;;
+esac
+
+tmp="$STATE.tmp.$$"
+printf '%s\n' "$new" > "$tmp"
+mv "$tmp" "$STATE"
+
+flavour=$([ "$new" = "light" ] && echo latte || echo mocha)
+
+# nvim: push colorscheme to every running instance
+for dir in "${XDG_RUNTIME_DIR:-}" "${TMPDIR:-}" /tmp; do
+  [ -n "$dir" ] || continue
+  for sock in "$dir"/nvim."$USER"/*/0; do
+    [ -S "$sock" ] || continue
+    nvim --server "$sock" --remote-expr \
+      "execute('colorscheme catppuccin-$flavour')" >/dev/null 2>&1 || true
+  done
+done
+
+# tmux: re-source config on every server socket
+for s in /tmp/tmux-"$(id -u)"/*; do
+  [ -S "$s" ] || continue
+  tmux -S "$s" source-file "$HOME/.config/tmux/tmux.conf" 2>/dev/null || true
+done
+
+# wezterm: watch-list reloads automatically, but touch for belt-and-suspenders
+touch "$HOME/.wezterm.lua" 2>/dev/null || true
+
+echo "theme: $new (was $cur)"

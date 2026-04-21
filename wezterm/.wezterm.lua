@@ -7,8 +7,18 @@ workspace_switcher.apply_to_config(config)
 
 config.font_size = 13
 
--- config.color_scheme = "Catppuccin Macchiato"
-config.color_scheme = "Catppuccin Mocha"
+local function read_scheme()
+	local f = io.open(os.getenv("HOME") .. "/.config/theme/current", "r")
+	if not f then
+		return "Catppuccin Mocha"
+	end
+	local v = f:read("*l")
+	f:close()
+	return v == "light" and "Catppuccin Latte" or "Catppuccin Mocha"
+end
+
+config.color_scheme = read_scheme()
+wezterm.add_to_config_reload_watch_list(os.getenv("HOME") .. "/.config/theme/current")
 
 config.window_decorations = "RESIZE"
 config.window_background_opacity = 1

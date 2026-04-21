@@ -1,3 +1,13 @@
+local function read_flavour()
+  local f = io.open(vim.fn.expand("~/.config/theme/current"), "r")
+  if not f then return "mocha" end
+  local v = f:read("*l")
+  f:close()
+  return v == "light" and "latte" or "mocha"
+end
+
+local flavour = read_flavour()
+
 return {
   -- {
   --   "folke/tokyonight.nvim",
@@ -22,8 +32,7 @@ return {
     name = "catppuccin",
     priority = 1000,
     opts = {
-      flavour = "mocha",
-      -- flavour = "macchiato",
+      flavour = flavour,
       transparent_background = false,
       -- transparent_background = true,
       integrations = {
@@ -74,7 +83,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "catppuccin",
+      colorscheme = "catppuccin-" .. flavour,
     },
   },
 }
